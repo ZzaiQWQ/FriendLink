@@ -27,19 +27,23 @@ Experimental. The current build is being migrated from the official newer multip
 ## Build
 
 ```bat
-gradlew.bat :versions:Fabric-1.21.1:build
-gradlew.bat :versions:Fabric-1.21.2:build
+gradlew.bat :versions:Fabric-1.21.1-1.21.2:build
+gradlew.bat :versions:Fabric-1.21.3-1.21.5:build
+gradlew.bat :versions:Fabric-1.21.6-1.21.8:build
+gradlew.bat :versions:Fabric-1.21.9-1.21.10:build
 gradlew.bat :versions:Fabric-1.21.11:build
 ```
 
-Version jars are produced under each version module, for example `versions/Fabric-1.21.1/build/libs/`.
+Version jars are produced under each version module, for example `versions/Fabric-1.21.9-1.21.10/build/libs/`.
 
 ## Project layout
 
-- `shared/src/main/java` contains version-neutral code shared by all supported Minecraft versions.
-- `versions/Fabric-1.21.1` contains Fabric resources, dependency versions, and Minecraft/Fabric API adapters for Minecraft 1.21.1.
-- `versions/Fabric-1.21.2` contains Fabric resources, dependency versions, and Minecraft/Fabric API adapters for Minecraft 1.21.2.
-- `versions/Fabric-1.21.11` contains Fabric resources, dependency versions, and Minecraft/Fabric API adapters for Minecraft 1.21.11.
+- `1.21-shared/src/main/java` contains version-neutral code shared by all supported Minecraft 1.21.x builds.
+- `versions/Fabric-1.21.1-1.21.2` targets Minecraft 1.21.1 and declares support for 1.21.1-1.21.2.
+- `versions/Fabric-1.21.3-1.21.5` targets Minecraft 1.21.3 and declares support for 1.21.3-1.21.5.
+- `versions/Fabric-1.21.6-1.21.8` targets Minecraft 1.21.6 and declares support for 1.21.6-1.21.8.
+- `versions/Fabric-1.21.9-1.21.10` targets Minecraft 1.21.9 and declares support for 1.21.9-1.21.10.
+- `versions/Fabric-1.21.11` targets Minecraft 1.21.11.
 - To add another Fabric version, copy one `versions/Fabric-*` folder, update its `gradle.properties`, then add it to `settings.gradle`.
 
 ## License
