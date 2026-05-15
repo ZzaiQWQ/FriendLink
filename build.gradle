@@ -6,3 +6,7 @@ allprojects {
     group = providers.gradleProperty('maven_group').get()
     version = providers.gradleProperty('mod_version').get()
 }
+
+configure(subprojects.findAll { it.path.startsWith(':versions:Fabric-1.21.') }) {
+    apply from: rootProject.file('1.21-shared/build.gradle')
+}
