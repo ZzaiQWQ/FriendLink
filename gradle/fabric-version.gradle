@@ -1,8 +1,6 @@
 apply plugin: 'fabric-loom'
 
 def versionName = project.name
-def sharedMain = rootProject.layout.projectDirectory.dir('shared/src/main')
-def sharedJavaDir = rootProject.file('shared/src/main/java')
 def shared21Main = rootProject.layout.projectDirectory.dir('1.21-shared/src/main')
 def shared21JavaDir = rootProject.file('1.21-shared/src/main/java')
 def shared21ResourcesDir = rootProject.file('1.21-shared/src/main/resources')
@@ -24,18 +22,10 @@ java {
 
 sourceSets {
     main {
-        java.srcDir(sharedMain.dir('java'))
         java.srcDir(shared21Main.dir('java'))
         java.exclude { element ->
-            def sharedPath = sharedJavaDir.toPath()
             def shared21Path = shared21JavaDir.toPath()
             def filePath = element.file.toPath()
-
-            if (filePath.startsWith(sharedPath)) {
-                def relativePath = sharedPath.relativize(filePath).toString()
-                return new File(shared21JavaDir, relativePath).isFile() ||
-                    new File(versionJavaDir, relativePath).isFile()
-            }
 
             if (filePath.startsWith(shared21Path)) {
                 def relativePath = shared21Path.relativize(filePath).toString()
