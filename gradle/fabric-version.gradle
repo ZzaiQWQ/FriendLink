@@ -11,6 +11,8 @@ def versionJavaDir = project.file('src/main/java')
 def versionResourcesDir = project.file('src/main/resources')
 def versionAccessWidener = project.file('src/main/resources/friendlink.accesswidener')
 def shared21AccessWidener = rootProject.file('1.21-shared/src/main/resources/friendlink.accesswidener')
+def minecraftDependency = project.findProperty('minecraft_dependency') ?: project.minecraft_version
+def minecraftSupportedVersion = project.findProperty('minecraft_supported_version') ?: project.minecraft_version
 
 base {
     archivesName = "${providers.gradleProperty('archives_base_name').get()}-${versionName}"
@@ -72,11 +74,15 @@ dependencies {
 processResources {
     inputs.property 'version', project.version
     inputs.property 'minecraft_version', project.minecraft_version
+    inputs.property 'minecraft_dependency', minecraftDependency
+    inputs.property 'minecraft_supported_version', minecraftSupportedVersion
     inputs.property 'loader_version', project.loader_version
     filesMatching('fabric.mod.json') {
         expand(
             'version': project.version,
             'minecraft_version': project.minecraft_version,
+            'minecraft_dependency': minecraftDependency,
+            'minecraft_supported_version': minecraftSupportedVersion,
             'loader_version': project.loader_version
         )
     }
