@@ -1,6 +1,9 @@
 apply plugin: 'fabric-loom'
 
 def versionName = project.name
+
+// Shared sources/resources for the Fabric 1.21.x line.
+// A file with the same relative path inside a version folder overrides this shared copy.
 def shared21Main = rootProject.layout.projectDirectory.dir('1.21-shared/src/main')
 def shared21JavaDir = rootProject.file('1.21-shared/src/main/java')
 def shared21ResourcesDir = rootProject.file('1.21-shared/src/main/resources')
@@ -35,6 +38,7 @@ sourceSets {
             return false
         }
 
+        // Shared resources work the same way as Java sources: version-local files win.
         resources.srcDir(shared21Main.dir('resources'))
         resources.exclude { element ->
             def shared21ResourcesPath = shared21ResourcesDir.toPath()
@@ -50,6 +54,7 @@ sourceSets {
 }
 
 loom {
+    // Most versions use the shared access widener; a version can provide its own when needed.
     accessWidenerPath = versionAccessWidener.isFile() ? versionAccessWidener : shared21AccessWidener
 }
 

@@ -7,6 +7,8 @@ allprojects {
     version = providers.gradleProperty('mod_version').get()
 }
 
+// Every Fabric 1.21.x target uses the shared 1.21 build script.
+// Version folders only need Gradle properties plus files that differ by Minecraft version.
 configure(subprojects.findAll { it.path.startsWith(':versions:Fabric-1.21.') }) {
     apply from: rootProject.file('1.21-shared/build.gradle')
 }
