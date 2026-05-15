@@ -3,7 +3,7 @@
   "id": "friendlink",
   "version": "${version}",
   "name": "FriendLink",
-  "description": "Friend-based official P2P multiplayer backport for Minecraft 1.21-1.21.1.",
+  "description": "Friend-based official P2P multiplayer backport for Minecraft 1.21.6-1.21.8.",
   "icon": "assets/friendlink/icon.png",
   "authors": [
     "ZzaiQWQ"
@@ -21,7 +21,7 @@
   "accessWidener": "friendlink.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": ">=1.21 <=1.21.1",
+    "minecraft": ">=1.21.6 <=1.21.8",
     "fabric-api": "*"
   }
 }

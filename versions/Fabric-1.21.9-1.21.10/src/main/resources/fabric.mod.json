@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "friendlink",
+  "version": "${version}",
+  "name": "FriendLink",
+  "description": "Friend-based official P2P multiplayer backport for Minecraft 1.21.9-1.21.10.",
+  "icon": "assets/friendlink/icon.png",
+  "authors": [
+    "ZzaiQWQ"
+  ],
+  "license": "GPL-3.0-only",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "zz.friendlink.FriendLinkClient"
+    ]
+  },
+  "mixins": [
+    "friendlink.mixins.json"
+  ],
+  "accessWidener": "friendlink.accesswidener",
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": ">=1.21.9 <=1.21.10",
+    "fabric-api": "*"
+  }
+}
