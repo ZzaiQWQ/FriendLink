@@ -2,7 +2,11 @@
 .gradle-user-home/
 .mc26_2/
 build/
+**/build/
+bin/
+**/bin/
 out/
+**/out/
 .idea/
 *.iml
 
@@ -11,5 +15,6 @@ out/
 *.bak
 
 run/
+**/run/
 logs/
 crash-reports/

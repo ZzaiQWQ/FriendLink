@@ -1,0 +1,65 @@
+apply plugin: 'fabric-loom'
+
+def versionName = project.name
+def sharedMain = rootProject.layout.projectDirectory.dir('shared/src/main')
+def sharedJavaDir = rootProject.file('shared/src/main/java')
+def versionJavaDir = project.file('src/main/java')
+
+base {
+    archivesName = "${providers.gradleProperty('archives_base_name').get()}-${versionName}"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(providers.gradleProperty('java_version').get().toInteger())
+    }
+    withSourcesJar()
+}
+
+sourceSets {
+    main {
+        java.srcDir(sharedMain.dir('java'))
+        java.exclude { element ->
+            def sharedPath = sharedJavaDir.toPath()
+            def filePath = element.file.toPath()
+            if (!filePath.startsWith(sharedPath)) {
+                return false
+            }
+            def relativePath = sharedPath.relativize(filePath).toString()
+            return new File(versionJavaDir, relativePath).isFile()
+        }
+    }
+}
+
+loom {
+    accessWidenerPath = file('src/main/resources/friendlink.accesswidener')
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    implementation "dev.onvoid.webrtc:webrtc-java:${project.webrtc_version}"
+    runtimeOnly "dev.onvoid.webrtc:webrtc-java:${project.webrtc_version}:windows-x86_64"
+    include "dev.onvoid.webrtc:webrtc-java:${project.webrtc_version}"
+    include "dev.onvoid.webrtc:webrtc-java:${project.webrtc_version}:windows-x86_64"
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'minecraft_version', project.minecraft_version
+    inputs.property 'loader_version', project.loader_version
+    filesMatching('fabric.mod.json') {
+        expand(
+            'version': project.version,
+            'minecraft_version': project.minecraft_version,
+            'loader_version': project.loader_version
+        )
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = providers.gradleProperty('java_version').get().toInteger()
+}

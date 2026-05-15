@@ -1,46 +1,8 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' version '1.16.0-alpha.12'
+    id 'fabric-loom' version '1.14.10' apply false
 }
 
-version = project.mod_version
-group = project.maven_group
-
-base {
-    archivesName = project.archives_base_name
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
-    }
-    withSourcesJar()
-}
-
-loom {
-    accessWidenerPath = file('src/main/resources/friendlink.accesswidener')
-}
-
-repositories {
-}
-
-dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-    implementation "dev.onvoid.webrtc:webrtc-java:${project.webrtc_version}"
-    runtimeOnly "dev.onvoid.webrtc:webrtc-java:${project.webrtc_version}:windows-x86_64"
-    include "dev.onvoid.webrtc:webrtc-java:${project.webrtc_version}"
-    include "dev.onvoid.webrtc:webrtc-java:${project.webrtc_version}:windows-x86_64"
-}
-
-processResources {
-    inputs.property 'version', project.version
-    filesMatching('fabric.mod.json') {
-        expand 'version': project.version
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-    options.release = 25
+allprojects {
+    group = providers.gradleProperty('maven_group').get()
+    version = providers.gradleProperty('mod_version').get()
 }

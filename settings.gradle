@@ -7,9 +7,8 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
-        maven { name = 'ProjectLoomMinecraft'; url = uri('.gradle/loom-cache/minecraftMaven') }
         maven { name = 'Fabric'; url = 'https://maven.fabricmc.net/' }
         maven { name = 'MinecraftLibraries'; url = 'https://libraries.minecraft.net/' }
         mavenCentral()
@@ -17,3 +16,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = 'FriendLink'
+
+include 'versions:Fabric-1.21.1'
+include 'versions:Fabric-1.21.2'
+include 'versions:Fabric-1.21.11'

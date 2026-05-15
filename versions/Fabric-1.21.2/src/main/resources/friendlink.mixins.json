@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "zz.friendlink.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "JoinMultiplayerScreenMixin",
+    "PauseScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
