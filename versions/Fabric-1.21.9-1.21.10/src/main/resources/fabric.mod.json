@@ -9,10 +9,14 @@
     "ZzaiQWQ"
   ],
   "license": "GPL-3.0-only",
-  "environment": "client",
+  "environment": "*",
   "entrypoints": {
+    "main": [
+      "zz.friendlink.tpa.FriendLinkTpa"
+    ],
     "client": [
-      "zz.friendlink.FriendLinkClient"
+      "zz.friendlink.FriendLinkClient",
+      "zz.friendlink.tpa.FriendLinkTpaClient"
     ]
   },
   "mixins": [
